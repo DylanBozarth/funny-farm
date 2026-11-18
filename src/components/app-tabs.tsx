@@ -11,37 +11,28 @@ export default function AppTabs() {
     <NativeTabs
       backgroundColor={colors.background}
       indicatorColor={colors.backgroundElement}
-      labelStyle={{ selected: { color: colors.text } }}>
+      iconColor={{ default: colors.textSecondary, selected: colors.text }}
+      tintColor={colors.text}
+      shadowColor={colors.backgroundSelected}
+      labelStyle={{ default: { color: colors.textSecondary }, selected: { color: colors.text } }}>
       <NativeTabs.Trigger name="index">
         <NativeTabs.Trigger.Label>Memes</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon
-          src={require('@/assets/images/tabIcons/home.png')}
-          renderingMode="template"
-        />
+        <NativeTabs.Trigger.Icon src={require('@/assets/images/tabIcons/emoji-memes.png')} renderingMode="original" />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="judge">
         <NativeTabs.Trigger.Label>Judge</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon
-          src={require('@/assets/images/tabIcons/explore.png')}
-          renderingMode="template"
-        />
+        <NativeTabs.Trigger.Icon src={require('@/assets/images/tabIcons/emoji-judge.png')} renderingMode="original" />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="upload">
         <NativeTabs.Trigger.Label>Upload</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon
-          src={require('@/assets/images/tabIcons/explore.png')}
-          renderingMode="template"
-        />
+        <NativeTabs.Trigger.Icon src={require('@/assets/images/tabIcons/emoji-upload.png')} renderingMode="original" />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="account">
         <NativeTabs.Trigger.Label>Account</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon
-          src={require('@/assets/images/tabIcons/explore.png')}
-          renderingMode="template"
-        />
+        <NativeTabs.Trigger.Icon src={require('@/assets/images/tabIcons/emoji-account.png')} renderingMode="original" />
       </NativeTabs.Trigger>
     </NativeTabs>
   );

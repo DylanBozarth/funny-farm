@@ -13,6 +13,7 @@ import { Colors, MaxContentWidth, Spacing } from '@/constants/theme';
 
 import { ThemedText } from './themed-text';
 import { ThemedView } from './themed-view';
+import { useTheme } from '@/hooks/use-theme';
 
 export default function AppTabs() {
   return (
@@ -21,16 +22,16 @@ export default function AppTabs() {
       <TabList asChild>
         <CustomTabList>
           <TabTrigger name="home" href="/" asChild>
-            <TabButton>Memes</TabButton>
+            <TabButton>😂 Memes</TabButton>
           </TabTrigger>
           <TabTrigger name="judge" href="/judge" asChild>
-            <TabButton>Judge</TabButton>
+            <TabButton>🔨 Judge</TabButton>
           </TabTrigger>
           <TabTrigger name="upload" href="/upload" asChild>
-            <TabButton>Upload</TabButton>
+            <TabButton>⬆️ Upload</TabButton>
           </TabTrigger>
           <TabTrigger name="account" href="/account" asChild>
-            <TabButton>Account</TabButton>
+            <TabButton>👤 Account</TabButton>
           </TabTrigger>
         </CustomTabList>
       </TabList>
@@ -39,11 +40,12 @@ export default function AppTabs() {
 }
 
 export function TabButton({ children, isFocused, ...props }: TabTriggerSlotProps) {
+  const theme = useTheme();
   return (
     <Pressable {...props} style={({ pressed }) => pressed && styles.pressed}>
       <ThemedView
         type={isFocused ? 'backgroundSelected' : 'backgroundElement'}
-        style={styles.tabButtonView}>
+        style={[styles.tabButtonView, { borderColor: isFocused ? theme.text : theme.backgroundSelected }]}>
         <ThemedText type="small" themeColor={isFocused ? 'text' : 'textSecondary'}>
           {children}
         </ThemedText>
@@ -58,7 +60,9 @@ export function CustomTabList(props: TabListProps) {
 
   return (
     <View {...props} style={styles.tabListContainer}>
-      <ThemedView type="backgroundElement" style={styles.innerContainer}>
+      <ThemedView
+        type="backgroundElement"
+        style={[styles.innerContainer, { borderColor: colors.backgroundSelected }]}>
         <ThemedText type="smallBold" style={styles.brandText}>
           Funny Farm
         </ThemedText>
@@ -83,6 +87,7 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.two,
     paddingHorizontal: Spacing.five,
     borderRadius: Spacing.five,
+    borderWidth: 1,
     flexDirection: 'row',
     alignItems: 'center',
     flexGrow: 1,
@@ -99,6 +104,7 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.one,
     paddingHorizontal: Spacing.three,
     borderRadius: Spacing.three,
+    borderWidth: 1,
   },
   externalPressable: {
     flexDirection: 'row',
