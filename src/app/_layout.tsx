@@ -1,14 +1,15 @@
-import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
+import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { useColorScheme } from "react-native";
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import { AuthProvider, useAuth } from '@/context/auth';
+import { AnimatedSplashOverlay } from "@/components/animated-icon";
+import { AuthProvider, useAuth } from "@/context/auth";
 
 SplashScreen.preventAutoHideAsync();
 
 function RootStack() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+  if (loading) return null; // wait for the saved session so we don't flash the login screen
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Protected guard={!!user}>
@@ -24,7 +25,7 @@ function RootStack() {
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <AuthProvider>
         <AnimatedSplashOverlay />
         <RootStack />

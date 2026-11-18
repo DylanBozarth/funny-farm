@@ -3,24 +3,46 @@
  * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://unistyl.es/), etc.
  */
 
-import '@/global.css';
+import "@/styling/global.css";
 
-import { Platform } from 'react-native';
+import { Platform } from "react-native";
+
+/** Brand palette (from src/styling/global.css). */
+export const Palette = {
+  vibrantCoral: "#FF5E5B",
+  dustGrey: "#D8D8D8",
+  ivory: "#FFFFEA",
+  strongCyan: "#00CECB",
+  bananaCream: "#FFED66",
+} as const;
+
+// Near-black used for text on light surfaces and for text on bright brand colors (better contrast than white).
+const ink = "#1A1A1A";
 
 export const Colors = {
   light: {
-    text: '#000000',
-    background: '#ffffff',
-    backgroundElement: '#F0F0F3',
-    backgroundSelected: '#E0E1E6',
-    textSecondary: '#60646C',
+    text: ink,
+    background: Palette.ivory,
+    backgroundElement: "#F1F1D8",
+    backgroundSelected: Palette.dustGrey,
+    textSecondary: "#5E5E55",
+    primary: Palette.vibrantCoral,
+    onPrimary: ink,
+    accent: Palette.strongCyan,
+    highlight: Palette.bananaCream,
+    danger: "#D6403D",
   },
   dark: {
-    text: '#ffffff',
-    background: '#000000',
-    backgroundElement: '#212225',
-    backgroundSelected: '#2E3135',
-    textSecondary: '#B0B4BA',
+    text: Palette.ivory,
+    background: ink,
+    backgroundElement: "#262624",
+    backgroundSelected: "#34342F",
+    textSecondary: Palette.dustGrey,
+    primary: Palette.vibrantCoral,
+    onPrimary: ink,
+    accent: Palette.strongCyan,
+    highlight: Palette.bananaCream,
+    danger: "#FF7A77",
   },
 } as const;
 
@@ -29,25 +51,25 @@ export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
 export const Fonts = Platform.select({
   ios: {
     /** iOS `UIFontDescriptorSystemDesignDefault` */
-    sans: 'system-ui',
+    sans: "system-ui",
     /** iOS `UIFontDescriptorSystemDesignSerif` */
-    serif: 'ui-serif',
+    serif: "ui-serif",
     /** iOS `UIFontDescriptorSystemDesignRounded` */
-    rounded: 'ui-rounded',
+    rounded: "ui-rounded",
     /** iOS `UIFontDescriptorSystemDesignMonospaced` */
-    mono: 'ui-monospace',
+    mono: "ui-monospace",
   },
   default: {
-    sans: 'normal',
-    serif: 'serif',
-    rounded: 'normal',
-    mono: 'monospace',
+    sans: "normal",
+    serif: "serif",
+    rounded: "normal",
+    mono: "monospace",
   },
   web: {
-    sans: 'var(--font-display)',
-    serif: 'var(--font-serif)',
-    rounded: 'var(--font-rounded)',
-    mono: 'var(--font-mono)',
+    sans: "var(--font-display)",
+    serif: "var(--font-serif)",
+    rounded: "var(--font-rounded)",
+    mono: "var(--font-mono)",
   },
 });
 
