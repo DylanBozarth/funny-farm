@@ -8,6 +8,7 @@ export type User = api.User;
 
 type AuthContextValue = {
   user: User | null;
+  token: string | null;
   /** True until the saved session has been checked with the server. */
   loading: boolean;
   signIn: (username: string, password: string) => Promise<void>;
@@ -54,7 +55,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (current) await api.logout(current).catch(() => {}); // server-side invalidation is best-effort
   }, [token]);
 
-  const value = useMemo(() => ({ user, loading, signIn, signOut }), [user, loading, signIn, signOut]);
+  const value = useMemo(() => ({ user, token, loading, signIn, signOut }), [user, token, loading, signIn, signOut]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

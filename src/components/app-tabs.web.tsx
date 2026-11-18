@@ -23,6 +23,12 @@ export default function AppTabs() {
           <TabTrigger name="home" href="/" asChild>
             <TabButton>Memes</TabButton>
           </TabTrigger>
+          <TabTrigger name="judge" href="/judge" asChild>
+            <TabButton>Judge</TabButton>
+          </TabTrigger>
+          <TabTrigger name="upload" href="/upload" asChild>
+            <TabButton>Upload</TabButton>
+          </TabTrigger>
           <TabTrigger name="account" href="/account" asChild>
             <TabButton>Account</TabButton>
           </TabTrigger>

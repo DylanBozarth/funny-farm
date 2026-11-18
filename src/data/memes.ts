@@ -45,13 +45,22 @@ export const MOCK_MEMES: Meme[] = [
   },
 ];
 
+/** The color options on the Judge screen (the bundled memes' categories), with a button color for each. */
+export const MEME_COLORS: { name: string; hex: string }[] = [
+  { name: 'Red', hex: '#E5484D' },
+  { name: 'Blue', hex: '#3E8EF7' },
+  { name: 'Green', hex: '#46B26B' },
+  { name: 'Orange', hex: '#F5953B' },
+  { name: 'Teal', hex: '#2BB5B0' },
+];
+
 /**
  * Returns the memes in random order (Fisher-Yates). If `notFirst` is given, the
  * new order won't start with that meme, so the same one never shows twice in a row
- * when a new round begins.
+ * when a new round begins. `extra` adds user-uploaded memes to the pool.
  */
-export function shuffleMemes(notFirst?: string): Meme[] {
-  const deck = [...MOCK_MEMES];
+export function shuffleMemes(notFirst?: string, extra: Meme[] = []): Meme[] {
+  const deck = [...MOCK_MEMES, ...extra];
   for (let i = deck.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [deck[i], deck[j]] = [deck[j], deck[i]];

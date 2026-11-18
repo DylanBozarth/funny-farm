@@ -1,12 +1,11 @@
 import { Image } from "expo-image";
-import { useState } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { BottomTabInset, MaxContentWidth, Spacing } from "@/constants/theme";
-import { shuffleMemes } from "@/data/memes";
+import { useMemeFeed } from "@/hooks/use-meme-feed";
 import { useTheme } from "@/hooks/use-theme";
 
 type Rating = -1 | 0 | 1;
@@ -19,20 +18,7 @@ const RATINGS: { value: Rating; emoji: string; label: string }[] = [
 
 export default function MemesScreen() {
   const theme = useTheme();
-  // Endless feed: play through a shuffled deck, then reshuffle and keep going.
-  const [{ deck, index }, setFeed] = useState(() => ({
-    deck: shuffleMemes(),
-    index: 0,
-  }));
-  const meme = deck[index];
-
-  function next() {
-    setFeed(({ deck, index }) =>
-      index + 1 < deck.length
-        ? { deck, index: index + 1 }
-        : { deck: shuffleMemes(deck[index].id), index: 0 },
-    );
-  }
+  const { meme, next } = useMemeFeed();
 
   function rate(value: Rating) {
     // TODO: POST the rating (meme.id, value) to the server.

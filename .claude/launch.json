@@ -1,0 +1,7 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "api", "runtimeExecutable": "node", "runtimeArgs": ["server/index.js"], "port": 3001 },
+    { "name": "web", "runtimeExecutable": "env", "runtimeArgs": ["EXPO_PUBLIC_API_URL=http://localhost:3002", "npx", "expo", "start", "--web"], "port": 8081 }
+  ]
+}
